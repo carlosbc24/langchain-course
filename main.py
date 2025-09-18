@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-
+f
 load_dotenv()
 
 from langchain import hub
@@ -8,14 +8,14 @@ from langchain.agents.react.agent import create_react_agent
 from langchain_core.output_parsers.pydantic import PydanticOutputParser
 from langchain_core.prompts import PromptTemplate
 from langchain_core.runnables import RunnableLambda
-from langchain_ollama import ChatOllama
+from langchain_openai import ChatOpenAI
 from langchain_tavily import TavilySearch
 
 from prompt import REACT_PROMPT_WITH_FORMAT_INSTRUCTIONS
 from schemas import AgentResponse
 
 tools = [TavilySearch()]
-llm = ChatOllama(model="llama3.2")
+llm = ChatOpenAI(model="gpt-5")
 react_prompt = hub.pull("hwchase17/react")
 output_parser = PydanticOutputParser(pydantic_object=AgentResponse)
 react_prompt_with_format_instructions = PromptTemplate(
@@ -42,7 +42,3 @@ def main():
         }
     )
     print(result)
-
-
-if __name__ == "__main__":
-    main()
